@@ -9,10 +9,12 @@ public class ItemBehavior : MonoBehaviour
 
     public bool mouseOver = false;
 
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,12 +27,20 @@ public class ItemBehavior : MonoBehaviour
     }
 
     void OnMouseOver() {
-        transform.localScale = new Vector3(1, 2, 1);
         mouseOver = true;
+        animator.SetBool("MouseOver", true);
     }
 
     void OnMouseExit() {
-        transform.localScale = Vector3.one;
         mouseOver = false;
+        animator.SetBool("MouseOver", false);
+    }
+
+    public void HasBeenSelected(bool selected) {
+        animator.SetBool("ItemSelected", selected);
+    }
+
+    public void HasBeenMatched() {
+        animator.SetBool("ItemMatch", true);
     }
 }
